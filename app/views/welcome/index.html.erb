@@ -1,0 +1,17 @@
+<div id="splash">
+  <% @golf_events.each do |event| %>
+  <div class="left">
+      <div class="overlay">
+        <% if session[:user_id] = nil %>
+          <a href="#"><%= golf_event.name %></a>
+        <% else  %>
+          <%= link_to(golf_event.name, golf_event_path(golf_event.id)) %>
+
+        <% end %>
+
+      </div>
+      <img src="<%= golf_event.image_url %>">
+  </div>
+  <% end %>
+</div>
+

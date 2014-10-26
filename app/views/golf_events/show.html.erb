@@ -1,0 +1,62 @@
+<section class="main">
+  <p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @golf_event.name %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @golf_event.location %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @golf_event.price %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @golf_event.score %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @golf_event.image_url %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @golf_event.user %>
+</p>
+
+  <p>
+    <% @comments.each do |comment| %>
+    <ul>
+      <li>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to(comment.title, comment_path(comment.id)) %>
+            </td>
+          </tr>
+        </tbody>
+      </li>
+    </ul>
+    <% end %>
+  </p>
+  <% if @golf_event.user_id == session[:user_id] %>
+  <%= link_to 'Add a Golf Event', new_golf_event_comment_path(@golf_event) %> |
+  <%= link_to 'Edit', edit_golf_event_path(@golf_event) %> |
+  <%= link_to 'Destroy', golf_event_path(@golf_event.id), method: :delete, data: { confirm: 'Are you sure?' } %> |
+
+  <%= link_to 'back', user_path(session[:user_id]) %>
+
+  <% else %>
+
+  <%= link_to 'back', user_path(@golf_event.user_id) %>
+
+  <% end %>
+</section>

@@ -1,0 +1,82 @@
+<h1 style="color: red"><%= notice %></h1>
+<section class="main">
+  <div class="left">
+
+  <div class="profile_info">
+    <p>
+      <img src="<%= @user.image_url %>" width="100px">
+    </p>
+  </div>
+  </div>
+  <div class="right">
+  <% if @user.id == session[:user_id] %>
+  <p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
+  <p><%= link_to 'Delete Profile', user_path(session[:user_id]), method: :delete, data: { confirm: 'Are you sure you want to delete your profile?' } %></p>
+  <% end %>
+  <br/>
+   <p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @user.dob %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @user.height %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @user.gender %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @user.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @user.country %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @user.image_url %>
+</p>
+
+<p>
+  <strong>Handicap:</strong>
+  <%= @user.handicap %>
+</p>
+
+<p>
+  <strong>Interests:</strong>
+  <%= @user.interests %>
+</p>
+
+  </div>
+
+</section>
+<section class="main">
+    <h1>Sagas</h1>
+    <% if @user.id == session[:user_id] %>
+    <%= link_to "Create New Golf Event", new_golf_event_path, class: "saga_build" %> |
+    <% end %>
+    <% @golf_events.each do |event| %> </br>
+    <%= link_to(golf_event.name, golf_event_path(golf_event.id)) %>
+     <% @comments.each do |comment| %>
+        <% if comment.golf_eventid == golf_event.id %>
+        <ul>
+        <li><img class="comment" src="<%= comment.image_url %>">&nbsp;&nbsp;<%= link_to(comment.title, comment_path(comment.id)) %></li>
+        </ul>
+        <% end %>
+
+      <% end %>
+    <% end %>
+    <h1 style="color: red"><%= notice %></h1>
+</section>
